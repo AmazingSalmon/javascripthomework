@@ -14,8 +14,6 @@ function isEmpty(aObject)
 {
     return Object.keys(aObject).length === 0;
 }
-
-console.log();
 //****** 3 ******
 let salaries = {
     Jarik: 1000,
