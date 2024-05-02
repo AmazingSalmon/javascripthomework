@@ -1,39 +1,22 @@
 //****** 1 ******
-//1
-let user = {};
-//2
-user.name = "Mark";
-//3
-user.surname = "Smith";
-//4
-user.name = "Taras";
-//5
-delete user.name;
+function random(min, max) {
+    let num = Math.random()*(max - min);
+    num = num + min;
+    return num;
+}
 //****** 2 ******
-function isEmpty(aObject)
-{
-    return Object.keys(aObject).length === 0;
+function isPrime(num) {
+    if((num%2 === 0 && num !== 2) || num <= 1) return false;
+    for(let i = 3; i <= Math.floor(Math.sqrt(num)); i+=2)
+    {
+        if(num%i === 0) return false;
+    }
+    return true;
 }
 //****** 3 ******
-let salaries = {
-    Jarik: 1000,
-    Anna: 1600,
-    Miko: 1300
-}
-let sum = 0;
-function getSum(obj) {
-    let sum = 0;
-    for(const key in obj)
+function recursiveSum(num) {
+    if(num>=0)
     {
-        if(typeof(obj[key])==="number") sum += obj[key];
-    }
-    return sum;
-}
-sum = getSum(salaries);
-//****** 4 ******
-function multiplyNumeric(obj) {
-    for(const key in obj)
-    {
-        if(typeof(obj[key])==="number") obj[key] = obj[key]*2;
-    }
+        return num*(num + 1)/2;
+    } else return -((-num)*((-num) + 1)/2);
 }
