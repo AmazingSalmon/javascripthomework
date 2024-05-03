@@ -5,7 +5,7 @@ function ucFirst(str) {
 }
 //****** 2 ******
 function checkSpam(str) {
-    if (str.toLowerCase().includes("росі")||str.toLowerCase().includes("XXX")) return true;
+    if (str.toLowerCase().includes("росі")||str.toLowerCase().includes("xxx")) return true;
     return false;
 }
 //****** 3 ******
