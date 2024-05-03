@@ -1,22 +1,31 @@
 //****** 1 ******
-function random(min, max) {
-    let num = Math.random()*(max - min);
-    num = num + min;
-    return num;
+function ucFirst(str) {
+    if(typeof str !== "string" || str.length === 0) return str;
+    return str.charAt(0).toUpperCase() + str.substring(1);
 }
 //****** 2 ******
-function isPrime(num) {
-    if((num%2 === 0 && num !== 2) || num <= 1) return false;
-    for(let i = 3; i <= Math.floor(Math.sqrt(num)); i+=2)
-    {
-        if(num%i === 0) return false;
-    }
-    return true;
+function checkSpam(str) {
+    if (str.toLowerCase().includes("росі")||str.toLowerCase().includes("XXX")) return true;
+    return false;
 }
 //****** 3 ******
-function recursiveSum(num) {
-    if(num>=0)
+function truncate(str, maxlength) {
+    if(str.length > maxlength) return str.substring(0, maxlength-1)+"...";
+    return str;
+}
+//****** 4 ******
+function strikeStr(str) {
+    if(typeof str !== "string" || str.length === 0) return str;
+    const words = str.split(' ');
+    let newstring = "";
+    for(let i= 0; i < words.length; i++)
     {
-        return num*(num + 1)/2;
-    } else return -((-num)*((-num) + 1)/2);
+        newstring = newstring + words[i];
+        if((i+1)%3===0)
+        {
+            newstring = newstring + '\n';
+        } else newstring = newstring + ' ';
+    }
+    newstring = newstring.substring(0, newstring.length-1);
+    return newstring;
 }
