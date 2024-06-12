@@ -1,31 +1,34 @@
 //****** 1 ******
-function ucFirst(str) {
-    if(typeof str !== "string" || str.length === 0) return str;
-    return str.charAt(0).toUpperCase() + str.substring(1);
+let styles = ["Jazz", "Blues"];
+styles.push("Rock-n-Roll");
+function getMedium(array) {
+    return Math.floor(array.length / 2);
 }
+styles[getMedium(styles)] = "Classics";
+styles.shift(); console.log(styles);
+styles.splice(0, 0, "Rap", "Reggae");
 //****** 2 ******
-function checkSpam(str) {
-    if (str.toLowerCase().includes("росі")||str.toLowerCase().includes("xxx")) return true;
-    return false;
+function sumInput() {
+    let numbers = [];
+    while(1)
+    {
+        let newnumber = parseInt(window.prompt("input number"));
+        if(isNaN(newnumber)) break;
+        numbers.push(newnumber);
+    }
+    const sum = numbers.reduce((acc, currentValue)=>acc+currentValue);
+    window.alert("sum is " + sum);
 }
 //****** 3 ******
-function truncate(str, maxlength) {
-    if(str.length > maxlength) return str.substring(0, maxlength-1)+"...";
-    return str;
-}
-//****** 4 ******
-function strikeStr(str) {
-    if(typeof str !== "string" || str.length === 0) return str;
-    const words = str.split(' ');
-    let newstring = "";
-    for(let i= 0; i < words.length; i++)
+function getMaxSubSum(arr)
+{
+    let maxSum = -Infinity;
+    let currentSum = 0;
+    for(let i = 0; i < arr.length; i++)
     {
-        newstring = newstring + words[i];
-        if((i+1)%3===0)
-        {
-            newstring = newstring + '\n';
-        } else newstring = newstring + ' ';
+        currentSum = Math.max(arr[i], currentSum + arr[i]);
+        maxSum = Math.max(currentSum, maxSum);
     }
-    newstring = newstring.substring(0, newstring.length-1);
-    return newstring;
+    if(maxSum<0) maxSum=0;
+    return maxSum;
 }
