@@ -29,9 +29,11 @@ function showAlert(message, type) {
 function addtolist()
 {
     const input = document.getElementById("grocery").value;
+    const itemid = Date.now();
     if(input) {
         const grocerylist = document.querySelector('.grocery-list');
-        grocerylist.innerHTML += `<p class='title'>${input}</p>
+        grocerylist.innerHTML += `<article data-iditem="${itemid}" class="grocery-item">
+            <p class='title'>${input}</p>
             <div class='btn-container'>
             <button type='button' class='edit-btn'>
             <i class='fas fa-edit'></i>
@@ -39,7 +41,8 @@ function addtolist()
             <button type='button' class='delete-btn'>
             <i class='fas fa-trash'></i>
             </button>
-            </div>`;
+            </div>
+            </article>`;
         localStorage.setItem("groceryList", grocerylist.innerHTML);
         document.getElementById("grocery").value = "";
         showAlert("Item Added To The List", "success");
@@ -47,10 +50,12 @@ function addtolist()
 }
 function startEditItem(btn)
 {
-    const itemdiv = btn.closest(".btn-container").previousElementSibling;
+    const item = btn.closest("article");
+    const title = item.querySelector(".title");
+
     document.querySelector(".submit-btn").textContent = "Редагувати";
-    document.getElementById("grocery").value = itemdiv.textContent;
-    elementToEdit = itemdiv;
+    document.getElementById("grocery").value = title.textContent;
+    elementToEdit = item;
     isEditing = true;
 }
 function editItem()
@@ -58,7 +63,7 @@ function editItem()
     const input = document.getElementById("grocery").value;
     if(input&&elementToEdit)
     {
-        elementToEdit.textContent = input;
+        elementToEdit.querySelector(".title").textContent = input;
         document.querySelector(".submit-btn").textContent = "Додати";
         document.getElementById("grocery").value = "";
         isEditing=false;
@@ -68,17 +73,17 @@ function editItem()
 }
 function deleteItem(btn)
 {
+    const item = btn.closest("article");
     const title = btn.closest(".btn-container").previousElementSibling;
     const container = btn.closest(".btn-container");
-    if(isEditing&&elementToEdit===title)
+    if(isEditing&&elementToEdit===item)
     {
         isEditing = false;
         document.querySelector(".submit-btn").textContent = "Додати";
         document.getElementById("grocery").value = "";
         elementToEdit = null;
     }
-    title.remove();
-    container.remove();
+    item.remove();
     localStorage.setItem("groceryList", document.querySelector('.grocery-list').innerHTML);
     showAlert("Item Removed", "danger");
 }
